@@ -1,5 +1,6 @@
 package org.example.core.service;
 
+import org.example.core.exceptions.InsertDataException;
 import org.example.core.model.DTO.StudentDTO;
 import org.example.core.model.Student;
 import org.example.core.repository.interfaces.IStudentsRepository;
@@ -28,8 +29,8 @@ public class StudentService implements IStudentsService {
     }
 
     @Override
-    public UUID addStudents(StudentDTO student) {
-        return null;
+    public UUID addStudents(StudentDTO student) throws InsertDataException {
+        return repository.addStudents(student);
     }
 
     @Override

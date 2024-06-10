@@ -3,18 +3,21 @@ package org.example.core.model.DTO;
 import java.util.Objects;
 
 public class GroupDTO {
-    String GroupName;
+    String groupName;
+
+    public GroupDTO() {
+    }
 
     public GroupDTO(String groupName) {
-        GroupName = groupName;
+        this.groupName = groupName;
     }
 
     public String getGroupName() {
-        return GroupName;
+        return groupName;
     }
 
     public void setGroupName(String groupName) {
-        GroupName = groupName;
+        this.groupName = groupName;
     }
 
     @Override

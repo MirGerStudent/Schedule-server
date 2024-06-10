@@ -7,14 +7,17 @@ public class StudentDTO {
     String surname;
     String patronymic;
     String status;
-    String groupName;
+    String groupId;
 
-    public StudentDTO(String name, String surname, String patronymic, String status, String groupName) {
+    public StudentDTO() {
+    }
+
+    public StudentDTO(String name, String surname, String patronymic, String status, String groupId) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.status = status;
-        this.groupName = groupName;
+        this.groupId = groupId;
     }
 
     public String getName() {
@@ -49,28 +52,28 @@ public class StudentDTO {
         this.status = status;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getGroupId() {
+        return groupId;
     }
 
     public void setGroupName(String groupName) {
-        this.groupName = groupName;
+        this.groupId = groupId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof StudentDTO that)) return false;
-        return Objects.equals(getName(), that.getName()) && Objects.equals(getSurname(), that.getSurname()) && Objects.equals(getPatronymic(), that.getPatronymic()) && Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getGroupName(), that.getGroupName());
+        return Objects.equals(getName(), that.getName()) && Objects.equals(getSurname(), that.getSurname()) && Objects.equals(getPatronymic(), that.getPatronymic()) && Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getGroupId(), that.getGroupId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname(), getPatronymic(), getStatus(), getGroupName());
+        return Objects.hash(getName(), getSurname(), getPatronymic(), getStatus(), getGroupId());
     }
 
     @Override
     public String toString() {
-        return String.format("%s %s %s, %s, %s", getSurname(), getName(), getPatronymic(), getGroupName(), getStatus());
+        return String.format("%s %s %s, %s, %s", getSurname(), getName(), getPatronymic(), getGroupId(), getStatus());
     }
 }
