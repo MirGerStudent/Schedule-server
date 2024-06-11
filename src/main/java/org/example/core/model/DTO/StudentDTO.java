@@ -3,11 +3,11 @@ package org.example.core.model.DTO;
 import java.util.Objects;
 
 public class StudentDTO {
-    String name;
-    String surname;
-    String patronymic;
-    String status;
-    String groupId;
+    private String name;
+    private String surname;
+    private String patronymic;
+    private String status;
+    private String groupId;
 
     public StudentDTO() {
     }

@@ -24,8 +24,8 @@ public class StudentRepository implements IStudentsRepository {
         this.jdbcOperations = jdbcOperations;
         this.studentRowMapper = (rs, rowNum) -> {
             UUID studentId = UUID.fromString(rs.getString("student_id"));
-            String studentSurname = rs.getString("student_surname");
             String studentName = rs.getString("student_name");
+            String studentSurname = rs.getString("student_surname");
             String studentPatronymic = rs.getString("student_patronymic");
             String studentStatus = rs.getString("student_status");
             UUID groupId = UUID.fromString(rs.getString("group_id"));
@@ -41,7 +41,8 @@ public class StudentRepository implements IStudentsRepository {
 
     @Override
     public Student getStudentById(UUID uuid) {
-        return null;
+        String sql = "SELECT * FROM \"students\" WHERE \"student_id\" = ?";
+        return jdbcOperations.queryForObject(sql, studentRowMapper, uuid);
     }
 
     @Override
@@ -68,6 +69,6 @@ public class StudentRepository implements IStudentsRepository {
 
     @Override
     public void deleteStudentById(UUID uuid) {
-
+        jdbcOperations.update("DELETE FROM student WHERE student_id = ?", uuid.toString());
     }
 }

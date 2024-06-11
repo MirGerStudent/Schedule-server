@@ -4,8 +4,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Group {
-    UUID id;
-    String name;
+    private UUID id;
+    private String name;
 
     public Group(UUID id, String name) {
         this.id = id;

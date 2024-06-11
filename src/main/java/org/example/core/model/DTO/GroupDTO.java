@@ -3,7 +3,7 @@ package org.example.core.model.DTO;
 import java.util.Objects;
 
 public class GroupDTO {
-    String groupName;
+    private String groupName;
 
     public GroupDTO() {
     }

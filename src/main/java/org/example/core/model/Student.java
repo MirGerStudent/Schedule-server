@@ -7,12 +7,12 @@ import java.util.UUID;
 
 //@Component
 public class Student {
-    UUID id;
-    String name;
-    String surname;
-    String patronymic;
-    String status;
-    UUID groupId;
+    private UUID id;
+    private String name;
+    private String surname;
+    private String patronymic;
+    private String status;
+    private UUID groupId;
 
     public Student(UUID id, String name, String surname, String patronymic, String status, UUID group) {
         this.id = id;
