@@ -5,6 +5,9 @@ import java.util.Objects;
 public class SubjectDTO {
     private String name;
 
+    public SubjectDTO() {
+    }
+
     public SubjectDTO(String name) {
         this.name = name;
     }
