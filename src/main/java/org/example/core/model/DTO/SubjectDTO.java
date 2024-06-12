@@ -1,8 +1,13 @@
 package org.example.core.model.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 
 public class SubjectDTO {
+    @NotBlank(message = "The \"subject\" field cannot be empty!")
+    @Size(min = 7, max = 36, message = "Incorrect name for subject!")
     private String name;
 
     public SubjectDTO() {
@@ -12,11 +17,11 @@ public class SubjectDTO {
         this.name = name;
     }
 
-    public String getName() {
+    public @NotBlank(message = "The \"subject\" field cannot be empty!") @Size(min = 7, max = 36, message = "Incorrect name for subject!") String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NotBlank(message = "The \"subject\" field cannot be empty!") @Size(min = 7, max = 36, message = "Incorrect name for subject!") String name) {
         this.name = name;
     }
 

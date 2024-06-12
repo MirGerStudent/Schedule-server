@@ -1,11 +1,24 @@
 package org.example.core.model.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 
 public class TeacherDTO {
+    @NotBlank(message = "The \"name\" field cannot be empty!")
+    @Size(min = 2, max = 15, message = "Incorrect name!")
     private String name;
+
+    @NotBlank(message = "The \"surname\" field cannot be empty!")
+    @Size(min = 2, max = 25, message = "Incorrect surname!")
     private String surname;
+
+    @Size(max = 20, message = "Incorrect patronymic!")
     private String patronymic;
+
+    @NotBlank(message = "The \"post\" field cannot be empty!")
+    @Size(min = 5, max = 36, message = "Incorrect teacher post!")
     private String post;
 
     public TeacherDTO() {
