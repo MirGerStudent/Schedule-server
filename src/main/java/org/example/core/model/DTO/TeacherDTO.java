@@ -31,35 +31,35 @@ public class TeacherDTO {
         this.post = post;
     }
 
-    public String getName() {
+    public @NotBlank(message = "The \"name\" field cannot be empty!") @Size(min = 2, max = 15, message = "Incorrect name!") String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NotBlank(message = "The \"name\" field cannot be empty!") @Size(min = 2, max = 15, message = "Incorrect name!") String name) {
         this.name = name;
     }
 
-    public String getSurname() {
+    public @NotBlank(message = "The \"surname\" field cannot be empty!") @Size(min = 2, max = 25, message = "Incorrect surname!") String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public void setSurname(@NotBlank(message = "The \"surname\" field cannot be empty!") @Size(min = 2, max = 25, message = "Incorrect surname!") String surname) {
         this.surname = surname;
     }
 
-    public String getPatronymic() {
+    public @Size(max = 20, message = "Incorrect patronymic!") String getPatronymic() {
         return patronymic;
     }
 
-    public void setPatronymic(String patronymic) {
+    public void setPatronymic(@Size(max = 20, message = "Incorrect patronymic!") String patronymic) {
         this.patronymic = patronymic;
     }
 
-    public String getPost() {
+    public @NotBlank(message = "The \"post\" field cannot be empty!") @Size(min = 5, max = 36, message = "Incorrect teacher post!") String getPost() {
         return post;
     }
 
-    public void setPost(String post) {
+    public void setPost(@NotBlank(message = "The \"post\" field cannot be empty!") @Size(min = 5, max = 36, message = "Incorrect teacher post!") String post) {
         this.post = post;
     }
 
