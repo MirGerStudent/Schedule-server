@@ -16,11 +16,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Repository
-public class StudentRepository implements IStudentsRepository {
+public class StudentsRepository implements IStudentsRepository {
     private final JdbcOperations jdbcOperations;
     private final RowMapper<Student> studentRowMapper;
 
-    public StudentRepository(JdbcOperations jdbcOperations) {
+    public StudentsRepository(JdbcOperations jdbcOperations) {
         this.jdbcOperations = jdbcOperations;
         this.studentRowMapper = (rs, rowNum) -> {
             UUID studentId = UUID.fromString(rs.getString("student_id"));
@@ -34,15 +34,15 @@ public class StudentRepository implements IStudentsRepository {
     }
 
     @Override
-    public List<Student> getStudentsByGroup(String group) {
+    public List<Student> getStudentsByGroupId(UUID groupID) {
         String sql = "SELECT * FROM \"students\" WHERE \"group_id\" = ?";
-        return jdbcOperations.query(sql, studentRowMapper, group);
+        return jdbcOperations.query(sql, studentRowMapper, groupID.toString());
     }
 
     @Override
     public Student getStudentById(UUID uuid) {
         String sql = "SELECT * FROM \"students\" WHERE \"student_id\" = ?";
-        return jdbcOperations.queryForObject(sql, studentRowMapper, uuid);
+        return jdbcOperations.queryForObject(sql, studentRowMapper, uuid.toString());
     }
 
     @Override
@@ -68,7 +68,17 @@ public class StudentRepository implements IStudentsRepository {
     }
 
     @Override
+    public UUID editStudent(StudentDTO student) {
+        return null;
+    }
+
+    @Override
     public void deleteStudentById(UUID uuid) {
         jdbcOperations.update("DELETE FROM student WHERE student_id = ?", uuid.toString());
+    }
+
+    @Override
+    public void addStudentByIdToLesson(UUID uuid) {
+
     }
 }

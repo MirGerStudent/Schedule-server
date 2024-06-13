@@ -50,8 +50,18 @@ public class GroupsRepository implements IGroupsRepository {
     }
 
     @Override
-    public Group getGroupById(long id) {
-        return null;
+    public void editGroup(GroupDTO group) {
+
+    }
+
+    @Override
+    public void deleteGroupById(UUID uuid) {
+
+    }
+
+    @Override
+    public void addGroupByIdToLesson(UUID uuid) {
+
     }
 
     @Override
@@ -61,12 +71,7 @@ public class GroupsRepository implements IGroupsRepository {
     }
 
     @Override
-    public void editGroup(Group group) {
-
-    }
-
-    @Override
-    public void deleteGroupById(long id) {
-
+    public Group getGroupById(UUID uuid) {
+        return null;
     }
 }

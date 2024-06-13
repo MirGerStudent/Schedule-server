@@ -42,6 +42,11 @@ public class TeachersRepository implements ITeachersRepository {
     }
 
     @Override
+    public void editTeacherById(TeacherDTO teacher) {
+
+    }
+
+    @Override
     public void deleteTeacherById(UUID uuid) {
 
     }

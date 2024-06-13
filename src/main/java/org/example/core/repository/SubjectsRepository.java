@@ -23,11 +23,6 @@ public class SubjectsRepository implements ISubjectsRepository {
     }
 
     @Override
-    public List<Subject> getSubjectByGroupId(UUID groupId) {
-        return List.of();
-    }
-
-    @Override
     public Subject getSubjectById(UUID subjectId) {
         return null;
     }
