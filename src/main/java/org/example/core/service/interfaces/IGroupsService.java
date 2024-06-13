@@ -11,6 +11,7 @@ public interface IGroupsService {
     List<Group> getAllGroups();
     Group getGroupById(long id);
     UUID addGroup(GroupDTO group) throws InsertDataException;
-    void editGroup(Group group);
     void deleteGroupById(long id);
+    void editGroup(Group group);
+    void addGroupByIdToLesson(UUID uuid);
 }
