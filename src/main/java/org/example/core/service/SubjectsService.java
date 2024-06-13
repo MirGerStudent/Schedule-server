@@ -5,7 +5,6 @@ import org.example.core.model.Subject;
 import org.example.core.repository.interfaces.ISubjectsRepository;
 import org.example.core.service.interfaces.ISubjectsService;
 
-import java.util.List;
 import java.util.UUID;
 
 public class SubjectsService implements ISubjectsService {
@@ -13,11 +12,6 @@ public class SubjectsService implements ISubjectsService {
 
     public SubjectsService(ISubjectsRepository subjectsRepository) {
         this.subjectsRepository = subjectsRepository;
-    }
-
-    @Override
-    public List<Subject> getSubjectByGroupId(UUID groupId) {
-        return List.of();
     }
 
     @Override

@@ -34,4 +34,9 @@ public class TeachersService implements ITeachersService {
     public void deleteTeacherById(UUID uuid) {
 
     }
+
+    @Override
+    public void editTeacherById(TeacherDTO teacher) {
+
+    }
 }

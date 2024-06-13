@@ -39,6 +39,11 @@ public class GroupsService implements IGroupsService {
     }
 
     @Override
+    public void addGroupByIdToLesson(UUID uuid) {
+
+    }
+
+    @Override
     public void deleteGroupById(long id) {
 
     }
