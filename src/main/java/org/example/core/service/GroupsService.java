@@ -24,7 +24,7 @@ public class GroupsService implements IGroupsService {
     }
 
     @Override
-    public Group getGroupById(long id) {
+    public Group getGroupById(UUID uuid) {
         return null;
     }
 
@@ -34,7 +34,7 @@ public class GroupsService implements IGroupsService {
     }
 
     @Override
-    public void editGroup(Group group) {
+    public void editGroup(GroupDTO group) {
 
     }
 
@@ -44,7 +44,7 @@ public class GroupsService implements IGroupsService {
     }
 
     @Override
-    public void deleteGroupById(long id) {
+    public void deleteGroupById(UUID uuid) {
 
     }
 }
