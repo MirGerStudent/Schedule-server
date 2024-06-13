@@ -1,5 +1,6 @@
 package org.example.core.repository.interfaces;
 
+import jakarta.validation.Valid;
 import org.example.core.model.DTO.TeacherDTO;
 import org.example.core.model.Teacher;
 
@@ -10,5 +11,6 @@ public interface ITeachersRepository {
     List<Teacher> getAllTeachers();
     Teacher getTeacherById(UUID uuid);
     UUID addTeacher(TeacherDTO teacher);
+    void editTeacherById(TeacherDTO teacher);
     void deleteTeacherById(UUID uuid);
 }

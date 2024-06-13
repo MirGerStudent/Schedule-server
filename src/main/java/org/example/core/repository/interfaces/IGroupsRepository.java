@@ -9,8 +9,9 @@ import java.util.UUID;
 
 public interface IGroupsRepository {
     List<Group> getAllGroups();
-    Group getGroupById(long id);
+    Group getGroupById(UUID uuid);
     UUID addGroup(GroupDTO group) throws InsertDataException;
-    void editGroup(Group group);
-    void deleteGroupById(long id);
+    void editGroup(GroupDTO group);
+    void deleteGroupById(UUID uuid);
+    void addGroupByIdToLesson(UUID uuid);
 }
