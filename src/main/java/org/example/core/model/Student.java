@@ -1,17 +1,33 @@
 package org.example.core.model;
 
-import org.springframework.stereotype.Component;
+import jakarta.validation.constraints.*;
 
 import java.util.Objects;
 import java.util.UUID;
 
-//@Component
 public class Student {
+    @NotBlank(message = "The \"UUID\" field cannot be empty")
+    @Size(min = 128, max = 128, message = "UUID is 128 characters long!")
     private UUID id;
+
+    @NotBlank(message = "The \"name\" field cannot be empty!")
+    @Size(min = 2, max = 15, message = "Incorrect name!")
     private String name;
+
+    @NotBlank(message = "The \"surname\" field cannot be empty!")
+    @Size(min = 2, max = 25, message = "Incorrect surname!")
     private String surname;
+
+    @Size(max = 20, message = "Incorrect patronymic!")
     private String patronymic;
+
+    @NotBlank(message = "The \"status\" field cannot be empty!")
+    @Pattern(regexp = "ACTIVE|SABBATICAL|EXPELLED|COMPLETED")
     private String status;
+
+    @NotBlank(message = "The \"UUID\" field cannot be empty")
+    @Pattern(regexp = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+    @Size(min = 36, max = 36, message = "UUID is 36 characters long!")
     private UUID groupId;
 
     public Student(UUID id, String name, String surname, String patronymic, String status, UUID group) {

@@ -1,13 +1,29 @@
 package org.example.core.model;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 import java.util.UUID;
 
 public class Teacher {
+    @NotNull(message = "The \"UUID\" field cannot be empty")
+    @Size(min = 128, max = 128, message = "UUID is 128 characters long!")
     private UUID uuid;
+
+    @NotNull(message = "The \"name\" field cannot be empty!")
+    @Size(min = 2, max = 15, message = "Incorrect name!")
     private String name;
+
+    @NotNull(message = "The \"surname\" field cannot be empty!")
+    @Size(min = 2, max = 25, message = "Incorrect surname!")
     private String surname;
+
+    @Max(value = 20, message = "Incorrect patronymic!")
     private String patronymic;
+
+    @NotNull(message = "The \"post\" field cannot be empty!")
     private String post;
 
     public Teacher(UUID uuid, String name, String surname, String patronymic, String post) {

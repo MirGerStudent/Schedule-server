@@ -1,6 +1,6 @@
 package org.example.core.repository;
 
-import org.example.core.exceptions.InsertDataException;
+import org.example.core.exceptions.RepositoryException;
 import org.example.core.model.DTO.StudentDTO;
 import org.example.core.model.Student;
 import org.example.core.repository.interfaces.IStudentsRepository;
@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-@Repository
 public class StudentsRepository implements IStudentsRepository {
     private final JdbcOperations jdbcOperations;
     private final RowMapper<Student> studentRowMapper;
@@ -46,7 +45,7 @@ public class StudentsRepository implements IStudentsRepository {
     }
 
     @Override
-    public UUID addStudents(StudentDTO student) throws InsertDataException {
+    public UUID addStudent(StudentDTO student) throws RepositoryException {
         try {
             String sql = "INSERT INTO \"students\" (\"student_id\", \"student_surname\", \"student_name\", \"student_patronymic\", \"student_status\", \"group_id\") VALUES(?, ?, ?, ?, ?, ?)";
             UUID newStudentUUID = UUID.randomUUID();
@@ -63,18 +62,30 @@ public class StudentsRepository implements IStudentsRepository {
             jdbcOperations.update(preparedStatementCreator);
             return Objects.requireNonNull(newStudentUUID);
         } catch (DataAccessException exception) {
-            throw new InsertDataException(String.format("Can't insert student into database: %s\nWith Exception: %s", student.toString(), exception));
+            throw new RepositoryException(String.format("Can't insert student into database: %s\nWith Exception: %s", student.toString(), exception));
         }
     }
 
     @Override
-    public UUID editStudent(StudentDTO student) {
-        return null;
+    public void editStudent(Student student) throws RepositoryException {
+        try {
+            String sql = "update \"students\" set \"student_surname\" = ?, \"student_name\" = ?, \"student_patronymic\" = ?, \"student_status\" = ?, \"group_id\" = ? where \"student_id\" = ?";
+            int rowsChanged = jdbcOperations.update(sql, student.getSurname(), student.getName(), student.getPatronymic(), student.getStatus(), student.getGroup(), student.getId());
+            if (rowsChanged == 0) {
+                throw new RepositoryException("Can't edit student: " + student);
+            }
+        } catch (DataAccessException exception) {
+            throw new RepositoryException("Can't edit student: " + student + "\n" + exception);
+        }
     }
 
     @Override
-    public void deleteStudentById(UUID uuid) {
-        jdbcOperations.update("DELETE FROM student WHERE student_id = ?", uuid.toString());
+    public void deleteStudentById(UUID uuid) throws RepositoryException {
+        try {
+            jdbcOperations.update("DELETE FROM student WHERE student_id = ?", uuid.toString());
+        } catch (DataAccessException exception) {
+            throw new RepositoryException("Can`t delete student!");
+        }
     }
 
     @Override

@@ -1,6 +1,6 @@
 package org.example.core.repository;
 
-import org.example.core.exceptions.InsertDataException;
+import org.example.core.exceptions.RepositoryException;
 import org.example.core.model.DTO.GroupDTO;
 import org.example.core.model.Group;
 import org.example.core.repository.interfaces.IGroupsRepository;
@@ -31,7 +31,7 @@ public class GroupsRepository implements IGroupsRepository {
 
 
     @Override
-    public UUID addGroup(GroupDTO group) throws InsertDataException {
+    public UUID addGroup(GroupDTO group) throws RepositoryException {
         try {
             String sql = "INSERT INTO \"groups\" (\"group_id\", \"group_name\") VALUES (?, ?)";
             UUID newGroupId = UUID.randomUUID();
@@ -44,34 +44,51 @@ public class GroupsRepository implements IGroupsRepository {
             jdbcOperations.update(preparedStatementCreator);
             return Objects.requireNonNull(newGroupId);
         } catch (DataAccessException exception) {
-            throw new InsertDataException(String.format("Can't insert group into database: %s\nWith Exception: %s", group.toString(), exception));
+            throw new RepositoryException(String.format("Can't insert group into database: %s\nWith Exception: %s", group.toString(), exception));
         }
 
     }
 
     @Override
-    public void editGroup(GroupDTO group) {
-
+    public void editGroup(Group group) throws RepositoryException {
+        try {
+            String sql = "UPDATE \"groups\" SET \"group_name\" = ? WHERE \"group_id\" = ?";
+            int check = jdbcOperations.update(sql, group.getName(), group.getId());
+            if (check == 0) {
+                throw new RepositoryException("Can't edit group: " + group);
+            }
+        } catch (DataAccessException e) {
+            throw new RepositoryException("Can't edit group: " + group);
+        }
     }
 
     @Override
-    public void deleteGroupById(UUID uuid) {
-
+    public void deleteGroupById(UUID uuid) throws RepositoryException {
+        String sql = "DELETE FROM \"groups\" WHERE \"group_id\" = ?";
+        int check = jdbcOperations.update(sql, uuid.toString());
+        if (check == 0) {
+            throw new RepositoryException("Can't delete group with id: " + uuid);
+        }
     }
 
     @Override
-    public void addGroupByIdToLesson(UUID uuid) {
+    public void addGroupByIdToLesson(UUID lessonId) {
 
     }
 
     @Override
     public List<Group> getAllGroups() {
-        String sql = "select * from \"groups\"";
+        String sql = "SELECT * FROM \"groups\"";
         return jdbcOperations.query(sql, groupRowMapper);
     }
 
     @Override
-    public Group getGroupById(UUID uuid) {
-        return null;
+    public Group getGroupById(UUID uuid) throws RepositoryException {
+        try {
+            String sql = "SELECT * FROM \"groups\" WHERE \"group_id\" = ?";
+            return jdbcOperations.queryForObject(sql, groupRowMapper, uuid.toString());
+        } catch (DataAccessException e) {
+            throw new RepositoryException("Group with id: " + uuid.toString() + " not found!");
+        }
     }
 }

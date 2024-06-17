@@ -25,8 +25,8 @@ public class SubjectsService implements ISubjectsService {
     }
 
     @Override
-    public Subject editSubject(SubjectDTO subject) {
-        return null;
+    public void editSubject(SubjectDTO subject) {
+
     }
 
     @Override

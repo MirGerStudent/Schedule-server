@@ -9,6 +9,6 @@ import java.util.UUID;
 public interface ISubjectsService {
     Subject getSubjectById(UUID subjectId);
     UUID addSubject(@Valid SubjectDTO subject);
-    Subject editSubject(@Valid SubjectDTO subject);
+    void editSubject(@Valid SubjectDTO subject);
     void deleteSubjectById(UUID subjectId);
 }

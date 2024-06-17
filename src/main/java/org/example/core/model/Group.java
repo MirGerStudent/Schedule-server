@@ -1,10 +1,16 @@
 package org.example.core.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 import java.util.UUID;
 
 public class Group {
     private UUID id;
+
+    @NotBlank(message = "The \"groupName\" field cannot be empty!")
+    @Size(min = 11, max = 11, message = "Incorrect groupName!")
     private String name;
 
     public Group(UUID id, String name) {
@@ -20,11 +26,11 @@ public class Group {
         this.id = id;
     }
 
-    public String getName() {
+    public @NotBlank(message = "The \"groupName\" field cannot be empty!") @Size(min = 11, max = 11, message = "Incorrect groupName!") String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NotBlank(message = "The \"groupName\" field cannot be empty!") @Size(min = 11, max = 11, message = "Incorrect groupName!") String name) {
         this.name = name;
     }
 

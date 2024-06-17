@@ -1,6 +1,10 @@
 package org.example.core.repository.interfaces;
 
-import org.example.core.exceptions.InsertDataException;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import org.example.core.exceptions.RepositoryException;
 import org.example.core.model.DTO.GroupDTO;
 import org.example.core.model.Group;
 
@@ -9,9 +13,9 @@ import java.util.UUID;
 
 public interface IGroupsRepository {
     List<Group> getAllGroups();
-    Group getGroupById(UUID uuid);
-    UUID addGroup(GroupDTO group) throws InsertDataException;
-    void editGroup(GroupDTO group);
-    void deleteGroupById(UUID uuid);
+    Group getGroupById(UUID uuid) throws RepositoryException;
+    UUID addGroup(GroupDTO group) throws RepositoryException;
+    void editGroup(Group group) throws RepositoryException;
+    void deleteGroupById(UUID uuid) throws RepositoryException;
     void addGroupByIdToLesson(UUID uuid);
 }
