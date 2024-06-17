@@ -1,5 +1,6 @@
 package org.example.core.repository;
 
+import org.example.core.exceptions.RepositoryException;
 import org.example.core.model.Group;
 import org.example.core.repository.interfaces.IGroupsRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -27,15 +29,18 @@ class GroupsRepositoryTest {
     }
 
     @Test
-    void getAllGroups() {
+    void getAllGroupsTest() {
         List<Group> groups = new ArrayList<>();
         when(jdbcOperations.query(anyString(), any(RowMapper.class))).thenReturn(groups);
         List<Group> answer = repository.getAllGroups();
-
+        assertEquals(groups, answer);
     }
 
     @Test
-    void getGroupById() {
-
+    void getGroupByIdTest() throws RepositoryException {
+        Group group = new Group(UUID.randomUUID(), "ММБ109-О-90");
+        when(jdbcOperations.queryForObject(anyString(), any(RowMapper.class), any())).thenReturn(group);
+        Group answer = repository.getGroupById(group.getId());
+        assertEquals(group, answer);
     }
 }
